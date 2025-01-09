@@ -1,0 +1,285 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  labels:
+    app: user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+        - name: user
+          image: username/user:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hotel-accommodation-provider
+  labels:
+    app: hotel-accommodation-provider
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hotel-accommodation-provider
+  template:
+    metadata:
+      labels:
+        app: hotel-accommodation-provider
+    spec:
+      containers:
+        - name: hotel-accommodation-provider
+          image: username/hotel-accommodation-provider:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airline
+  labels:
+    app: airline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airline
+  template:
+    metadata:
+      labels:
+        app: airline
+    spec:
+      containers:
+        - name: airline
+          image: username/airline:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transportation-provider
+  labels:
+    app: transportation-provider
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transportation-provider
+  template:
+    metadata:
+      labels:
+        app: transportation-provider
+    spec:
+      containers:
+        - name: transportation-provider
+          image: username/transportation-provider:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tourist-attraction-provider
+  labels:
+    app: tourist-attraction-provider
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tourist-attraction-provider
+  template:
+    metadata:
+      labels:
+        app: tourist-attraction-provider
+    spec:
+      containers:
+        - name: tourist-attraction-provider
+          image: username/tourist-attraction-provider:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: user
+  labels:
+    app: user
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: user
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hotel-accommodation-provider
+  labels:
+    app: hotel-accommodation-provider
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: hotel-accommodation-provider
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: airline
+  labels:
+    app: airline
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: airline
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: transportation-provider
+  labels:
+    app: transportation-provider
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: transportation-provider
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tourist-attraction-provider
+  labels:
+    app: tourist-attraction-provider
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: tourist-attraction-provider
+
